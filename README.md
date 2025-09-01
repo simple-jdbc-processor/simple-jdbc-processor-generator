@@ -7,6 +7,6 @@ Simple jdbc generator 是一个纯静态html编写的查询生成器,可以快�
 
 ###  Query
 
-前往 [Simple Jdbc Generate Query](https://wu191287278.github.io/mybatis-processor-generator/) 生成代码
+前往 [Simple Jdbc Generate Query](https://simple-jdbc-processor.github.io/simple-jdbc-processor-generator/) 生成代码
 
 
