@@ -19,6 +19,7 @@
         <spring-cloud.version>2025.0.0</spring-cloud.version>
         <spring-boot.version>3.5.5</spring-boot.version>
         <simple-jdbc-processor.version>1.0.3</simple-jdbc-processor.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
     </properties>
 
     <dependencyManagement>
@@ -73,6 +74,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>{{{packagePath}}}.Application</mainClass>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
