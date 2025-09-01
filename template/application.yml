@@ -1,0 +1,30 @@
+server:
+  port: 8080
+  shutdown: graceful
+spring:
+  application:
+    name: {{{artifact}}}
+  datasource:
+    url: jdbc:mysql://localhost/users?useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      max-lifetime: 1800000
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+    default-property-inclusion: NON_NULL
+  data:
+    redis:
+      host: localhost
+      repositories:
+        enabled: false
+      port: 6379
+
+logging:
+  level:
+    root: info
+    {{{packagePath}}}.repository: debug
+

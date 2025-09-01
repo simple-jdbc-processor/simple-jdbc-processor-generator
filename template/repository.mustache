@@ -1,0 +1,13 @@
+package {{{packagePath}}}.repository;
+
+import {{{packagePath}}}.domain.{{{modelName}}};
+import {{{packagePath}}}.domain.{{{modelName}}}Example;
+
+{{#tableComment}}
+/**
+ * {{tableComment}}.
+ **/
+{{/tableComment}}
+public interface {{{modelName}}}Repository extends {{{modelName}}}SimpleJdbcRepository {
+
+}

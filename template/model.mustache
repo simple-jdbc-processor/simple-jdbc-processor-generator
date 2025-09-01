@@ -1,0 +1,42 @@
+package {{{packagePath}}}.domain;
+
+import io.github.simple.jdbc.processor.SimpleJdbc;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+
+import javax.persistence.*;
+
+{{#tableComment}}
+/**
+ * {{tableComment}}.
+ **/
+{{/tableComment}}
+@SimpleJdbc
+@Getter
+@Setter
+@ToString
+@Accessors(chain = true)
+@Entity
+@Table(name = "{{{tableName}}}")
+public class {{{modelName}}} {
+
+{{#fields}}
+    {{#columnComment}}
+    /**
+     * {{{columnComment}}}.
+     */
+    {{/columnComment}}
+    {{#primaryKey}}
+    @Id
+    {{/primaryKey}}
+    {{#autoIncrement}}
+    @GeneratedValue
+    {{/autoIncrement}}
+    @Column(name = "{{columnName}}", columnDefinition = "{{columnType}}"{{#notNull}}, nullable = false{{/notNull}}{{#columnLength}}, length = {{columnLength}}{{/columnLength}}{{#columnScale}}, scale = {{columnScale}}{{/columnScale}})
+    private {{{fieldType}}} {{fieldName}};
+
+{{/fields}}
+
+}
