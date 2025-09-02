@@ -4,11 +4,14 @@ import {{{packagePath}}}.domain.{{{modelName}}};
 import {{{packagePath}}}.domain.{{{modelName}}}Example;
 import {{{packagePath}}}.domain.{{{modelName}}}SimpleJdbcRepository;
 
+import org.springframework.stereotype.Repository;
+
 {{#tableComment}}
 /**
  * {{tableComment}}.
  **/
 {{/tableComment}}
+@Repository
 public class {{{modelName}}}Repository extends {{{modelName}}}SimpleJdbcRepository {
 
 }

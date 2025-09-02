@@ -5,7 +5,7 @@ spring:
   application:
     name: {{{artifact}}}
   datasource:
-    url: jdbc:mysql://localhost/users?useSSL=false&allowPublicKeyRetrieval=true
+    url: “jdbc:mysql://localhost/users?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8mb4&rewriteBatchedStatements=true&allowMultiQueries=true&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=250&prepStmtCacheSqlLimit=2048”
     username: root
     password: root
     hikari:
