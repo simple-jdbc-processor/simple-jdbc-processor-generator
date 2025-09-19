@@ -22,10 +22,6 @@ spring:
       repositories:
         enabled: false
       port: 6379
-    mongodb:
-      uri: mongodb://root:rootpassword@localhost:27017/simple_db?authSource=admin
-  elasticsearch:
-    uris: http://localhost:9200
 logging:
   level:
     root: info
