@@ -118,6 +118,13 @@
                         <input type='text' class='form-control' id="addSuffix" value=""
                                placeholder="Suffix">
                     </div>
+                    <div class='form-group'>
+                        <label>Java Date Type:</label>
+                        <select class="form-control" id="javaDateType">
+                            <option selected="selected" value="java.util.Date">java.util.Date</option>
+                            <option value="java.time.LocalDateTime">java.time.LocalDateTime</option>
+                        </select>
+                    </div>
                     <div class='modal-footer'>
                         <button type="button" onclick="generatorSpringBootView()" class='btn btn-primary'>Preview
                         </button>
@@ -391,6 +398,7 @@
         let trimPrefix = document.getElementById("trimPrefix").value;
         let addPrefix = document.getElementById("addPrefix").value;
         let addSuffix = document.getElementById("addSuffix").value;
+        let javaDateType = document.getElementById("javaDateType").value;
         let zip = await JSZip.loadAsync(baseData);
 
         let settings = settingsEditor.getValue().split(";");
@@ -402,7 +410,7 @@
             if (!sql.trim().toUpperCase().startsWith("CREATE")) {
                 continue;
             }
-            let tableDefine = getFields(sql, trimPrefix, addPrefix, addSuffix);
+            let tableDefine = getFields(sql, trimPrefix, addPrefix, addSuffix, javaDateType);
             tableDefine.artifact = artifact;
             tableDefine.application = upperCamel(artifact);
             tableDefine.packagePath = packagePath;
@@ -457,7 +465,7 @@
 
     }
 
-    function getFields(value, trimPrefix, addPrefix, addSuffix) {
+    function getFields(value, trimPrefix, addPrefix, addSuffix, javaDateType) {
         let start = value.indexOf("(");
         let end = value.lastIndexOf(")");
         let tableSplit = value.split(/\s+/g);
@@ -556,7 +564,7 @@
             }
 
             let fieldName = convertToCamelCase(columnName);
-            let fieldType = getJavaType(columnType);
+            let fieldType = getJavaType(columnType, javaDateType);
 
             let filed = {
                 columnName: columnName,
@@ -636,6 +644,9 @@
                 "BINARY": "Byte[]",
                 "BIT": "Boolean",
             };
+            if (DEFAULT_TYPE_MAPPING[columnType] === "java.util.Date") {
+                return javaDateType;
+            }
             if (DEFAULT_TYPE_MAPPING[columnType]) {
                 return DEFAULT_TYPE_MAPPING[columnType];
             }
@@ -943,6 +954,7 @@
         let trimPrefix = document.getElementById("trimPrefix").value;
         let addPrefix = document.getElementById("addPrefix").value;
         let addSuffix = document.getElementById("addSuffix").value;
+        let javaDateType = document.getElementById("javaDateType").value;
         document.getElementById("codePreview").innerText = artifact;
         let packageDir = packagePath.replaceAll(".", "/");
         let queryNodes = [];
@@ -1028,7 +1040,7 @@
             if (!sql.trim().toUpperCase().startsWith("CREATE")) {
                 continue;
             }
-            let tableDefine = getFields(sql, trimPrefix, addPrefix, addSuffix);
+            let tableDefine = getFields(sql, trimPrefix, addPrefix, addSuffix, javaDateType);
             tableDefine.artifact = artifact;
             tableDefine.application = upperCamel(artifact);
             tableDefine.packagePath = packagePath;
